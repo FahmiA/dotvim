@@ -23,9 +23,6 @@ Plugin 'mattn/flappyvird-vim'
 
 call vundle#end()
 
-" Enable the pathogen plugin manager
-"execute pathogen#infect()
-
 " Set theme
 if has('gui_running')
     colorscheme solarized
@@ -33,20 +30,14 @@ if has('gui_running')
 else
     set background=dark
 endif
-"if $COLORTERM == 'gnome-terminal'
-"  set t_Co=256
-"endif
-"let g:solarized_termcolors=256
+
+" Toogle theme on F5
 call togglebg#map("<F5>")
 
 " Set fonts
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=Hack\ 11
-  "elseif has("gui_macvim")
-  "  set guifont=Menlo\ Regular:h14
-  "elseif has("gui_win32")
-  "  set guifont=Consolas:h11:cANSI
   endif
 endif
 
@@ -62,7 +53,6 @@ syntax enable
 autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufNewFile,BufRead .jshintrc set ft=javascript
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd BufNewFile,BufReadPost *.csst set filetype=css
 
 " Various tabbing options for writing code
 set tabstop=4
@@ -96,9 +86,6 @@ if has('gui_running')
     set cursorline
 endif
 
-" Automatically close XML tags
-let g:closetag_filenames = "*.xml,*.xsl,*.xslt,*.xsd,*.html,*.xhtml,*.phtml"
-
 " Omnicomplete (like intellisense)
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -115,22 +102,13 @@ nnoremap g<c-]> <c-]>
 vnoremap g<c-]> <c-]>
 
 " Launch MRU (most recently used files list)
-map <leader>f :MRU<CR>
-
-" Launch vim-jsdoc
-nmap <silent> <C-l> <Plug>(jsdoc)
-let g:jsdoc_underscore_private = 1
+map <leader>f :CtrlPMRU<CR>
 
 " Configure Syntastic with JsHint
 let g:syntastic_javascript_checkers = ['jshint']
 
 " Configure CamelCaseMotion
 call camelcasemotion#CreateMotionMappings('<leader>')
-
-" vim-jsbeautify keyboard shortcuts
-autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 " Disable arrow keys
 map <up> <nop>
@@ -143,17 +121,13 @@ imap <left> <nop>
 imap <right> <nop>
 
 " Correct :Wq typo for :wq
+command W w
+command Q q
 command Wq wq
 command WQ wq
-command Q q
 
 " Ignore some folders for file search
-set wildignore+=node_modules,bower_components,target
-
-" Latex-Suite configuration
-filetype plugin on
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
+set wildignore+=node_modules,bower_components,target,build
 
 " Functions to rearrange tabs
 function TabLeft()
