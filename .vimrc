@@ -10,13 +10,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
+Plugin 'bkad/CamelCaseMotion'
 
 Plugin 'mattn/flappyvird-vim'
 
@@ -122,6 +123,9 @@ let g:jsdoc_underscore_private = 1
 
 " Configure Syntastic with JsHint
 let g:syntastic_javascript_checkers = ['jshint']
+
+" Configure CamelCaseMotion
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 " vim-jsbeautify keyboard shortcuts
 autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<cr>
