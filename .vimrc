@@ -1,4 +1,3 @@
-source $VIMRUNTIME/mswin.vim
 behave mswin
 set nocompatible
 
@@ -10,7 +9,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'altercation/vim-colors-solarized'
@@ -19,9 +18,17 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'bkad/CamelCaseMotion'
 
+" TypeScript support
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
+
 Plugin 'mattn/flappyvird-vim'
 
 call vundle#end()
+
+" Enable the pathogen plugin manager
+"execute pathogen#infect()
 
 " Set theme
 if has('gui_running')
@@ -52,7 +59,14 @@ syntax enable
 " Syntax highlighting extensions
 autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufNewFile,BufRead .jshintrc set ft=javascript
+autocmd BufNewFile,BufRead .jsbeautifyrc set ft=javascript
+autocmd BufNewFile,BufRead .eslintrc set ft=javascript
+autocmd BufNewFile,BufRead .tslint set ft=javascript
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.ts set filetype=typescript
+autocmd BufNewFile,BufReadPost *.lcanx set filetype=xml
+autocmd BufNewFile,BufReadPost *.lccfg set filetype=xml
+autocmd BufNewFile,BufReadPost *.kml set filetype=xml
 
 " Various tabbing options for writing code
 set tabstop=4
@@ -101,11 +115,17 @@ vnoremap <c-]> g<c-]>
 nnoremap g<c-]> <c-]>
 vnoremap g<c-]> <c-]>
 
-" Launch MRU (most recently used files list)
-map <leader>f :CtrlPMRU<CR>
+" NERDTree
+map <leader>r :NERDTreeFind<cr>
+
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+map <leader>f :CtrlPMRU<cr>
 
 " Configure Syntastic with JsHint
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Configure CamelCaseMotion
 call camelcasemotion#CreateMotionMappings('<leader>')
