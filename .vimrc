@@ -1,3 +1,4 @@
+source $VIMRUNTIME/mswin.vim
 behave mswin
 set nocompatible
 
