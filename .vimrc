@@ -70,6 +70,9 @@ autocmd BufNewFile,BufReadPost *.lcanx set filetype=xml
 autocmd BufNewFile,BufReadPost *.lccfg set filetype=xml
 autocmd BufNewFile,BufReadPost *.kml set filetype=xml
 
+" Set tabs to 2 spaces in package.json files
+autocmd BufNewFile,BufRead package.json setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
 " Various tabbing options for writing code
 set tabstop=4
 set shiftwidth=4
