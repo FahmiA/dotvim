@@ -59,7 +59,6 @@ endif
 syntax enable
 
 " Syntax highlighting extensions
-autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufNewFile,BufRead .jshintrc set ft=javascript
 autocmd BufNewFile,BufRead .jsbeautifyrc set ft=javascript
 autocmd BufNewFile,BufRead .eslintrc set ft=javascript
