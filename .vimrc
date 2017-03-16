@@ -99,6 +99,9 @@ set autochdir
 " Highlight search terms
 set hlsearch
 
+" Make double-<Esc> clear search highlights
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
 " Highlight current line
 if has('gui_running')
     set cursorline
