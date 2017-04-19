@@ -18,6 +18,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'bkad/CamelCaseMotion'
+Plugin 'wellle/targets.vim'
 
 " ES6 & TypeScript support
 Plugin 'jelera/vim-javascript-syntax'
