@@ -51,10 +51,8 @@ if has("gui_running")
   endif
 endif
 
-" Removing the annoying print option from the gvim toolbar
-if has('gui_running')
-    :aunmenu ToolBar.Print
-endif
+" Hide the toolbar
+set guioptions-=T  "toolbar
 
 " Turn on syntax highlighting
 syntax enable
