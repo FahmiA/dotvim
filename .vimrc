@@ -180,3 +180,8 @@ endfunction
 
 map <silent><C-J> :execute TabLeft()<CR>
 map <silent><C-K> :execute TabRight()<CR>
+
+" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
