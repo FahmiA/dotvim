@@ -64,6 +64,7 @@ autocmd BufNewFile,BufRead .jshintrc set ft=javascript
 autocmd BufNewFile,BufRead .jsbeautifyrc set ft=javascript
 autocmd BufNewFile,BufRead .eslintrc set ft=javascript
 autocmd BufNewFile,BufRead .tslint set ft=javascript
+autocmd BufNewFile,BufRead .npmrc set ft=dosini
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.ts set filetype=typescript
 autocmd BufNewFile,BufReadPost *.lcanx set filetype=xml
