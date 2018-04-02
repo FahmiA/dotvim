@@ -67,6 +67,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.ts set filetype=typescript
 autocmd BufNewFile,BufReadPost *.lcanx set filetype=xml
 autocmd BufNewFile,BufReadPost *.lccfg set filetype=xml
+autocmd BufNewFile,BufReadPost *.pplc set filetype=xml
 autocmd BufNewFile,BufReadPost *.kml set filetype=xml
 
 " Set tabs to 2 spaces in package.json files
