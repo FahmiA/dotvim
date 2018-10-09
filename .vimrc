@@ -72,6 +72,8 @@ autocmd BufNewFile,BufReadPost *.kml set filetype=xml
 
 " Set tabs to 2 spaces in package.json files
 autocmd BufNewFile,BufRead package.json setlocal tabstop=2 shiftwidth=2 softtabstop=2
+" Set tabs to 2 spaces in yaml files
+autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Various tabbing options for writing code
 set tabstop=4
