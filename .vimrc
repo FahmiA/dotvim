@@ -186,6 +186,9 @@ map <silent><C-K> :execute TabRight()<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" Disable bracketed paste mode
+set t_BE=
+
 " Organise backup directories
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
