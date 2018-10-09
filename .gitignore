@@ -1,2 +1,7 @@
 # Ignore bundles manages by Vundle
 bundle
+
+# Ignore temp files
+backup
+swap
+undo
