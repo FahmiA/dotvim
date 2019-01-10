@@ -134,8 +134,9 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 map <leader>f :CtrlPMRU<cr>
 
-" Configure Syntastic with JsHint
+" Configure Syntastic with linters
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_yaml_checkers = ['yamllint']
 
 " Configure CamelCaseMotion
 call camelcasemotion#CreateMotionMappings('<leader>')
