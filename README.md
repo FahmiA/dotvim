@@ -14,4 +14,5 @@ Switch to the `~/.vim` directory, and fetch submodules:
 
 Install plugins:
 
-    vim +PluginInstall +qall
+    vim +PackUpdate
+

@@ -1,48 +1,65 @@
-source $VIMRUNTIME/mswin.vim
-behave mswin
-set nocompatible
-
-" Configure Vundle to manage Pathogen bundles
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-
-Plugin 'scrooloose/syntastic'
-Plugin 'altercation/vim-colors-solarized'
-
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-surround'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'wellle/targets.vim'
-
-" ES6 & TypeScript support
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Quramy/tsuquyomi'
-
-Plugin 'mattn/flappyvird-vim'
-
-call vundle#end()
-
-" Enable the pathogen plugin manager
-"execute pathogen#infect()
-
-" Set theme
-if has('gui_running')
-    colorscheme solarized
-    set background=light
-else
-    set background=dark
+" Normally this if-block is not needed, because `:set nocp` is done
+" automatically when .vimrc is found. However, this might be useful
+" when you execute `vim -u .vimrc` from the command line.
+if &compatible
+  " `:set nocp` has many side effects. Therefore this should be done
+  " only when 'compatible' is set.
+  set nocompatible
 endif
 
-" Toogle theme on F5
-call togglebg#map("<F5>")
+function! PackInit() abort
+  " Start and update minipac package manager
+  packadd minpac
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+  " Project management
+  call minpac#add('scrooloose/nerdtree')
+  call minpac#add('ctrlpvim/ctrlp.vim')
+
+  " Text commands
+  call minpac#add('scrooloose/nerdcommenter')
+  call minpac#add('tpope/vim-surround')
+  call minpac#add('bkad/CamelCaseMotion')
+  call minpac#add('wellle/targets.vim')
+
+  " Syntax highlighting
+  call minpac#add('scrooloose/syntastic')
+
+  " Theme
+  call minpac#add('lifepillar/vim-solarized8')
+
+  " ES6 & TypeScript support
+  call minpac#add('jelera/vim-javascript-syntax')
+  call minpac#add('leafgarland/typescript-vim')
+  call minpac#add('Shougo/vimproc.vim')
+  call minpac#add('Quramy/tsuquyomi')
+endfunction
+
+" Define user commands for updating/cleaning the plugins.
+" Each of them calls PackInit() to load minpac and register
+" the information of plugins, then performs the task.
+command! PackUpdate call PackInit() | call minpac#update()
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus packadd minpac | call minpac#status()
+
+" Syntax highlighting
+syntax enable
+
+" Colour scheme: https://github.com/lifepillar/vim-solarized8
+set termguicolors
+set background=light
+autocmd vimenter * ++nested colorscheme solarized8
+
+" Toogle colour scheme on F5
+function! ToggleBackground()
+  if &background == "dark"
+    set background=light
+  else
+    set background=dark
+  endif
+endfunction
+nnoremap <F5> :call ToggleBackground()<CR>
 
 " Set fonts
 if has("gui_running")
@@ -54,31 +71,16 @@ endif
 " Hide the toolbar
 set guioptions-=T  "toolbar
 
-" Turn on syntax highlighting
-syntax enable
-
 " Syntax highlighting extensions
-autocmd BufNewFile,BufRead .jshintrc set ft=javascript
-autocmd BufNewFile,BufRead .jsbeautifyrc set ft=javascript
 autocmd BufNewFile,BufRead .eslintrc set ft=javascript
-autocmd BufNewFile,BufRead .tslint set ft=javascript
 autocmd BufNewFile,BufRead .npmrc set ft=dosini
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.ts set filetype=typescript
-autocmd BufNewFile,BufReadPost *.lcanx set filetype=xml
-autocmd BufNewFile,BufReadPost *.lccfg set filetype=xml
-autocmd BufNewFile,BufReadPost *.pplc set filetype=xml
-autocmd BufNewFile,BufReadPost *.kml set filetype=xml
-
-" Set tabs to 2 spaces in package.json files
-autocmd BufNewFile,BufRead package.json setlocal tabstop=2 shiftwidth=2 softtabstop=2
-" Set tabs to 2 spaces in yaml files
-autocmd FileType yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Various tabbing options for writing code
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set smarttab
 set expandtab
 set autoindent
@@ -135,11 +137,10 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 map <leader>f :CtrlPMRU<cr>
 
 " Configure Syntastic with linters
-let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_yaml_checkers = ['yamllint']
 
 " Configure CamelCaseMotion
-call camelcasemotion#CreateMotionMappings('<leader>')
+let g:camelcasemotion_key = '<leader>'
 
 " Disable arrow keys
 map <up> <nop>
@@ -158,7 +159,7 @@ command Wq wq
 command WQ wq
 
 " Ignore some folders for file search
-set wildignore+=node_modules,bower_components,target,build
+set wildignore+=node_modules,bower_components,target,build,dist
 
 " Functions to rearrange tabs
 function TabLeft()

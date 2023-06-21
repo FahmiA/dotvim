@@ -1,5 +1,5 @@
-# Ignore bundles manages by Vundle
-bundle
+# Ignore Vim bundles
+pack
 
 # Ignore temp files
 backup
