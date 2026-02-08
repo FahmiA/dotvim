@@ -16,6 +16,7 @@ function! PackInit() abort
   " Project management
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('ctrlpvim/ctrlp.vim')
+  call minpac#add('vimwiki/vimwiki')
 
   " Text commands
   call minpac#add('scrooloose/nerdcommenter')
@@ -141,6 +142,12 @@ let g:syntastic_yaml_checkers = ['yamllint']
 
 " Configure CamelCaseMotion
 let g:camelcasemotion_key = '<leader>'
+
+" VimWiki
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': 'md'}]
+let g:vimwiki_global_ext = 0
 
 " Disable arrow keys
 map <up> <nop>
